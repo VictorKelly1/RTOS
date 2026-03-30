@@ -7,9 +7,13 @@
 class Process final {
 
 private:
-  using TaskFunction = void (*)();
+  using TaskFunction = void (*)();  //function Ptr
 
-  enum class State : uint8_t { READY, RUNNING, BLOCKED };
+  enum class State : uint8_t { 
+        READY, 
+        RUNNING, 
+        BLOCKED 
+  };
 
   static constexpr uint16_t STACK_SIZE{128};
 
@@ -19,7 +23,7 @@ private:
   TaskFunction m_task;
 
   uint8_t m_stack[STACK_SIZE]; // static size of 128 words
-  uint8_t *m_sp;
+  uint8_t* m_sp;
 
   State m_state;
 
@@ -33,8 +37,8 @@ public:
   Process(TaskFunction task, uint8_t priority);
 
   // Getters and Setters
-  uint8_t *getSP() const { return m_sp; }
-  void setSP(uint8_t *sp) { m_sp = sp; }
+  uint8_t* getSP() const { return m_sp; }
+  void setSP(uint8_t* sp) { m_sp = sp; }
 
   uint8_t getPID() const { return m_pid; }
   uint8_t getPriority() const { return m_priority; }
