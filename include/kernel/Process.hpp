@@ -36,6 +36,9 @@ public:
 
   Process(TaskFunction task, uint8_t priority);
 
+  //Member Fucntions
+  void stackInit();
+
   // Getters and Setters
   uint8_t* getSP() const { return m_sp; }
   void setSP(uint8_t* sp) { m_sp = sp; }

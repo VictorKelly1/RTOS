@@ -1,15 +1,11 @@
 #include "kernel/Process.hpp"
 
+//Variables definitions 
 uint8_t Process::PID{0};
 
-Process::Process(TaskFunction task, uint8_t priority)
-    : m_task(task)
-    , m_state(State::READY)
-    , m_priority(priority) 
-{
-  m_pid = ++PID;
+//Function definitions 
+void Process::stackInit(){
 
-  //Stack iniciatlization
   m_sp = &m_stack[STACK_SIZE - 1];
 
   uint16_t funcPtr = reinterpret_cast<uint16_t>(m_task); //Pointer to the task
@@ -23,5 +19,16 @@ Process::Process(TaskFunction task, uint8_t priority)
         *m_sp-- = 0x00;
   }
 
-  ++m_sp;
+  ++m_sp; 
+}
+
+//Constructor definitions
+Process::Process(TaskFunction task, uint8_t priority)
+    : m_task(task)
+    , m_state(State::READY)
+    , m_priority(priority) 
+{
+  m_pid = ++PID;
+
+  Process::stackInit();
 }
