@@ -6,9 +6,6 @@
 extern "C" void switchContextASM(Process* current, Process* next);
 
 
-//------------------------------------------------
-// Context Switch
-//------------------------------------------------
 
 void Kernel::switchContext(Process* next)
 {
@@ -20,9 +17,6 @@ void Kernel::switchContext(Process* next)
 }
 
 
-//------------------------------------------------
-// Timer0 init (1ms tick)
-//------------------------------------------------
 
 void Kernel::initTimer0()
 {
@@ -48,9 +42,6 @@ void Kernel::initTimer0()
 }
 
 
-//------------------------------------------------
-// Timer interrupt
-//------------------------------------------------
 
 ISR(TIMER0_COMPA_vect)
 {
@@ -58,9 +49,6 @@ ISR(TIMER0_COMPA_vect)
 }
 
 
-//------------------------------------------------
-// Scheduler (test with 2 processes)
-//------------------------------------------------
 
 void Kernel::scheduler()
 {
@@ -77,9 +65,6 @@ void Kernel::scheduler()
 }
 
 
-//------------------------------------------------
-// Task creation
-//------------------------------------------------
 
 void Kernel::createTask(void (*taskFunction)(), uint8_t priority)
 {
@@ -92,9 +77,6 @@ void Kernel::createTask(void (*taskFunction)(), uint8_t priority)
 }
 
 
-//------------------------------------------------
-// Start Kernel
-//------------------------------------------------
 
 void Kernel::start()
 {
@@ -107,14 +89,10 @@ void Kernel::start()
 
     sei();
 
-    // comenzar ejecutando el primer proceso
     switchContext(m_currentProcess);
 }
 
 
-//------------------------------------------------
-// Singleton
-//------------------------------------------------
 
 Kernel Kernel::instance;
 
@@ -124,9 +102,6 @@ Kernel& Kernel::getInstance()
 }
 
 
-//------------------------------------------------
-// Constructor
-//------------------------------------------------
 
 Kernel::Kernel()
 {

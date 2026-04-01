@@ -28,7 +28,7 @@ public:
 
 private:
 
-    static Kernel instance;     // ⚠ nombre consistente
+    static Kernel instance;     
 
     Kernel();
     ~Kernel() = default;
